@@ -30,6 +30,8 @@ const enderecoRoute = require("./routes/enderecoRoute");
 const pedidoRoute = require("./routes/pedidoRoute");
 const servicoRoute = require("./routes/servicoRoute");
 const pedidocarroservicoRoute = require("./routes/pedidoCarroServicoRoute");
+const pedidoFuncionarioRoute = require("./routes/pedidoFuncionarioRoute");
+const notaFiscalRoute = require("./routes/notafiscalRoute");
 
 app.use("/funcionario", funcionarioRoute);
 app.use("/cliente", clienteRoute);
@@ -38,6 +40,8 @@ app.use("/endereco", enderecoRoute);
 app.use("/pedido", pedidoRoute);
 app.use("/servico", servicoRoute);
 app.use("/pedidocarroservico", pedidocarroservicoRoute);
+app.use("/pedidofuncionario", pedidoFuncionarioRoute);
+app.use("/noatfiscal", notaFiscalRoute);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
