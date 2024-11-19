@@ -39,6 +39,7 @@ const deletarServico = async (req, res) => {
     const servico = await prisma.servico.delete({
       where: { id: parseInt(id) },
     });
+    res.status(200).json(servico)
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
