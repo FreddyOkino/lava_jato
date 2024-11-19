@@ -20,38 +20,10 @@ const pedidoController = require("../controllers/pedidoController");
  *               clienteId:
  *                 type: integer
  *                 example: 1
- *               funcionarioId:
- *                 type: integer
- *                 example: 2
  *               status:
  *                 type: string
  *                 example: "EM_ANDAMENTO"
- *               carros:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     carroId:
- *                       type: integer
- *                       example: 1
- *                     tipo:
- *                       type: string
- *                       example: "Simples"
- *                     preco:
- *                       type: number
- *                       format: float
- *                       example: 30.0
- *                     status:
- *                       type: string
- *                       example: "EM_ANDAMENTO"
- *               servicos:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     servicoId:
- *                       type: integer
- *                       example: 1
+ *               
  *     responses:
  *       201:
  *         description: Pedido criado com sucesso
@@ -66,41 +38,11 @@ const pedidoController = require("../controllers/pedidoController");
  *                 clienteId:
  *                   type: integer
  *                   example: 1
- *                 funcionarioId:
- *                   type: integer
- *                   example: 2
  *                 status:
  *                   type: string
  *                   example: "EM_ANDAMENTO"
- *                 lavagens:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       tipo:
- *                         type: string
- *                         example: "Simples"
- *                       preco:
- *                         type: number
- *                         format: float
- *                         example: 30.0
- *                       status:
- *                         type: string
- *                         example: "EM_ANDAMENTO"
- *                       carroId:
- *                         type: integer
- *                         example: 1
- *                 servicos:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       servicoId:
- *                         type: integer
- *                         example: 1
- *                       servicoNome:
- *                         type: string
- *                         example: "Lavagem Completa"
+ *                
+ *                       
  */
 route.post("/", pedidoController.createPedido);
 
@@ -129,47 +71,19 @@ route.post("/", pedidoController.createPedido);
  *               type: array
  *               items:
  *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 1
- *                   status:
- *                     type: string
- *                     example: "EM_ANDAMENTO"
- *                   clienteId:
- *                     type: integer
- *                     example: 1
- *                   lavagens:
- *                     type: array
- *                     items:
- *                       type: object
- *                       properties:
- *                         tipo:
- *                           type: string
- *                           example: "Simples"
- *                         preco:
- *                           type: number
- *                           format: float
- *                           example: 30.0
- *                         status:
- *                           type: string
- *                           example: "EM_ANDAMENTO"
- *                         carroId:
- *                           type: integer
- *                           example: 1
- *                   servicos:
- *                     type: array
- *                     items:
- *                       type: object
- *                       properties:
- *                         servicoId:
- *                           type: integer
- *                           example: 1
- *                         servicoNome:
- *                           type: string
- *                           example: "Lavagem Completa"
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 clienteId:
+ *                   type: integer
+ *                   example: 1
+ *                 status:
+ *                   type: string
+ *                   example: "EM_ANDAMENTO"
+ *                   
+ *                   
  */
-
 route.get("/:clienteId", pedidoController.getPedidosByCliente);
 
 /**
@@ -198,37 +112,8 @@ route.get("/:clienteId", pedidoController.getPedidosByCliente);
  *                    clienteId:
  *                      type: integer
  *                      example: 1
- *                    lavagens:
- *                      type: array
- *                      items:
- *                        type: object
- *                        properties:
- *                          tipo:
- *                            type: string
- *                            example: "Simples"
- *                          preco:
- *                            type: number
- *                            format: float
- *                            example: 30.0
- *                          status:
- *                            type: string
- *                            example: "EM_ANDAMENTO"
- *                          carroId:
- *                            type: integer
- *                            example: 1
- *                    servicos:
- *                      type: array
- *                      items:
- *                        type: object
- *                        properties:
- *                          servicoId:
- *                            type: integer
- *                            example: 1
- *                          servicoNome:
- *                            type: string
- *                            example: "Lavagem Completa"
+ *                    
  */
-
 route.get("/", pedidoController.buscarPedidos);
 
 /**
@@ -263,15 +148,13 @@ route.get("/", pedidoController.buscarPedidos);
  *                   format: date-time
  *                 status:
  *                   type: string
- *                 total:
- *                   type: number
- *                   format: float
  *       400:
  *         description: Erro ao tentar deletar o pedido
  *       404:
  *         description: Pedido não encontrado
  */
 route.delete("/:id", pedidoController.deletePedido);
+
 /**
  * @swagger
  * /pedido/{id}:
@@ -298,41 +181,10 @@ route.delete("/:id", pedidoController.deletePedido);
  *               clienteId:
  *                 type: integer
  *                 example: 1
- *               funcionarioId:
- *                 type: integer
- *                 example: 2
  *               status:
  *                 type: string
  *                 example: "FINALIZADO"
- *               lavagens:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     tipo:
- *                       type: string
- *                       example: "Simples"
- *                     preco:
- *                       type: number
- *                       format: float
- *                       example: 30.0
- *                     status:
- *                       type: string
- *                       example: "FINALIZADO"
- *                     carroId:
- *                       type: integer
- *                       example: 1
- *               servicos:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     servicoId:
- *                       type: integer
- *                       example: 1
- *                     servicoNome:
- *                       type: string
- *                       example: "Lavagem Completa"
+ *               
  *     responses:
  *       200:
  *         description: Pedido atualizado com sucesso
@@ -347,47 +199,15 @@ route.delete("/:id", pedidoController.deletePedido);
  *                 clienteId:
  *                   type: integer
  *                   example: 1
- *                 funcionarioId:
- *                   type: integer
- *                   example: 2
  *                 status:
  *                   type: string
  *                   example: "FINALIZADO"
- *                 lavagens:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       tipo:
- *                         type: string
- *                         example: "Simples"
- *                       preco:
- *                         type: number
- *                         format: float
- *                         example: 30.0
- *                       status:
- *                         type: string
- *                         example: "FINALIZADO"
- *                       carroId:
- *                         type: integer
- *                         example: 1
- *                 servicos:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       servicoId:
- *                         type: integer
- *                         example: 1
- *                       servicoNome:
- *                         type: string
- *                         example: "Lavagem Completa"
+ *                 
  *       400:
  *         description: Erro ao tentar atualizar o pedido
  *       404:
  *         description: Pedido não encontrado
  */
 route.put("/:id", pedidoController.updatePedidoStatus);
-
 
 module.exports = route;

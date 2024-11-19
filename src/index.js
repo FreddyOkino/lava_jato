@@ -27,13 +27,17 @@ const clienteRoute = require("./routes/clienteRoute");
 const funcionarioRoute = require("./routes/funcionarioRoute");
 const carroRoute = require("./routes/carroRoute");
 const enderecoRoute = require("./routes/enderecoRoute");
-const pedidoRoute = require("./routes/pedidoRoute")
+const pedidoRoute = require("./routes/pedidoRoute");
+const servicoRoute = require("./routes/servicoRoute");
+const pedidocarroservicoRoute = require("./routes/pedidoCarroServicoRoute");
 
 app.use("/funcionario", funcionarioRoute);
 app.use("/cliente", clienteRoute);
 app.use("/carro", carroRoute);
 app.use("/endereco", enderecoRoute);
-app.use("/pedido",pedidoRoute)
+app.use("/pedido", pedidoRoute);
+app.use("/servico", servicoRoute);
+app.use("/pedidocarroservico", pedidocarroservicoRoute);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

@@ -296,5 +296,4 @@ route.delete("/:id", enderecoController.deleteCarro);
  */
 route.put("/:id", enderecoController.updateEndereco);
 
-
 module.exports = route;
