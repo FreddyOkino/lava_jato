@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Configure a variável de ambiente para o banco
+}
+
+model Cliente {
+  id        Int        @id @default(autoincrement())
+  nome      String
+  telefone  String
+  cpf       String
+  email     String
+  enderecos Endereco[]
+  pedidos   Pedido[]
+  carros    Carro[]
+}
+
+model Endereco {
+  id          Int     @id @default(autoincrement())
+  tipo        String 
+  logradouro  String
+  numero      String
+  complemento String?
+  bairro      String
+  cidade      String
+  estado      String
+  cep         String
+  clienteId   Int
+  cliente     Cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+}
+
+model Pedido {
+  id            Int             @id @default(autoincrement())
+  data          DateTime        @default(now())
+  status        String 
+  clienteId     Int
+  cliente       Cliente         @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  servicos      PedidoServico[]
+  funcionario   Funcionario?    @relation(fields: [funcionarioId], references: [id], onDelete: SetNull)
+  funcionarioId Int?
+  notaFiscal    NotaFiscal?
+}
+
+model Servico {
+  id        Int             @id @default(autoincrement())
+  nome      String
+  descricao String
+  preco     Float
+  pedidos   PedidoServico[]
+}
+
+model PedidoServico {
+  pedidoId  Int
+  servicoId Int
+  pedido    Pedido  @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  servico   Servico @relation(fields: [servicoId], references: [id], onDelete: Cascade)
+
+  @@id([pedidoId, servicoId])
+}
+
+model Funcionario {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  cargo    String
+  telefone String
+  pedidos  Pedido[]
+}
+
+model NotaFiscal {
+  id         Int    @id @default(autoincrement())
+  valorTotal Float
+  pedidoId   Int    @unique
+  pedido     Pedido @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+}
+
+model Carro {
+  id        Int     @id @default(autoincrement())
+  modelo    String
+  placa     String
+  cor       String
+  clienteId Int?
+  cliente   Cliente? @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+}
