@@ -2,11 +2,17 @@ const express = require("express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const prisma = require("@prisma/client").PrismaClient;
+const cors = require("cors");
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 const options = {
   definition: {
