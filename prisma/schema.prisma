@@ -104,3 +104,14 @@ model PedidoFuncionario {
 
   @@id([pedidoId, funcionarioId])  // Chave primária composta
 }
+model Log {
+  id         Int      @id @default(autoincrement())
+  tableName  String   @map("table_name") // Correspondente ao campo table_name
+  operation  String
+  recordId   Int      @map("record_id")  // Correspondente ao campo record_id
+  oldData    Json?    @map("old_data")   // Campo JSON opcional para dados antigos
+  newData    Json?    @map("new_data")   // Campo JSON opcional para dados novos
+  changedAt  DateTime @default(now()) @map("changed_at") // Timestamp padrão
+
+  @@map("logs") // Define o nome da tabela como "logs"
+}

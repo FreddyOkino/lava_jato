@@ -31,7 +31,6 @@ CREATE TABLE "Pedido" (
     "data" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" TEXT NOT NULL,
     "clienteId" INTEGER NOT NULL,
-    "funcionarioId" INTEGER,
 
     CONSTRAINT "Pedido_pkey" PRIMARY KEY ("id")
 );
@@ -54,14 +53,6 @@ CREATE TABLE "Servico" (
     "preco" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "Servico_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "PedidoServico" (
-    "pedidoId" INTEGER NOT NULL,
-    "servicoId" INTEGER NOT NULL,
-
-    CONSTRAINT "PedidoServico_pkey" PRIMARY KEY ("pedidoId","servicoId")
 );
 
 -- CreateTable
@@ -94,6 +85,27 @@ CREATE TABLE "Carro" (
     CONSTRAINT "Carro_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "PedidoFuncionario" (
+    "pedidoId" INTEGER NOT NULL,
+    "funcionarioId" INTEGER NOT NULL,
+
+    CONSTRAINT "PedidoFuncionario_pkey" PRIMARY KEY ("pedidoId","funcionarioId")
+);
+
+-- CreateTable
+CREATE TABLE "logs" (
+    "id" SERIAL NOT NULL,
+    "table_name" TEXT NOT NULL,
+    "operation" TEXT NOT NULL,
+    "record_id" INTEGER NOT NULL,
+    "old_data" JSONB,
+    "new_data" JSONB,
+    "changed_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "logs_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "PedidoCarroServico_pedidoId_carroId_servicoId_key" ON "PedidoCarroServico"("pedidoId", "carroId", "servicoId");
 
@@ -107,9 +119,6 @@ ALTER TABLE "Endereco" ADD CONSTRAINT "Endereco_clienteId_fkey" FOREIGN KEY ("cl
 ALTER TABLE "Pedido" ADD CONSTRAINT "Pedido_clienteId_fkey" FOREIGN KEY ("clienteId") REFERENCES "Cliente"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Pedido" ADD CONSTRAINT "Pedido_funcionarioId_fkey" FOREIGN KEY ("funcionarioId") REFERENCES "Funcionario"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "PedidoCarroServico" ADD CONSTRAINT "PedidoCarroServico_pedidoId_fkey" FOREIGN KEY ("pedidoId") REFERENCES "Pedido"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -119,13 +128,13 @@ ALTER TABLE "PedidoCarroServico" ADD CONSTRAINT "PedidoCarroServico_carroId_fkey
 ALTER TABLE "PedidoCarroServico" ADD CONSTRAINT "PedidoCarroServico_servicoId_fkey" FOREIGN KEY ("servicoId") REFERENCES "Servico"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PedidoServico" ADD CONSTRAINT "PedidoServico_pedidoId_fkey" FOREIGN KEY ("pedidoId") REFERENCES "Pedido"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PedidoServico" ADD CONSTRAINT "PedidoServico_servicoId_fkey" FOREIGN KEY ("servicoId") REFERENCES "Servico"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "NotaFiscal" ADD CONSTRAINT "NotaFiscal_pedidoId_fkey" FOREIGN KEY ("pedidoId") REFERENCES "Pedido"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Carro" ADD CONSTRAINT "Carro_clienteId_fkey" FOREIGN KEY ("clienteId") REFERENCES "Cliente"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PedidoFuncionario" ADD CONSTRAINT "PedidoFuncionario_pedidoId_fkey" FOREIGN KEY ("pedidoId") REFERENCES "Pedido"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PedidoFuncionario" ADD CONSTRAINT "PedidoFuncionario_funcionarioId_fkey" FOREIGN KEY ("funcionarioId") REFERENCES "Funcionario"("id") ON DELETE CASCADE ON UPDATE CASCADE;

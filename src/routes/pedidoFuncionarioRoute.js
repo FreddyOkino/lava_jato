@@ -102,7 +102,28 @@ route.get("/", PedidoFuncionarioController.buscarPedidosFuncionarios);
  *         description: Associação não encontrada
  */
 route.get("/:id", PedidoFuncionarioController.buscarPedidoFuncionarioPorId);
-
+/**
+ * @swagger
+ * /pedidofuncionario/{id}:
+ *   delete:
+ *     summary: Exclui uma associação PedidoFuncionario por ID
+ *     tags: 
+ *       - pedido-funcionario
+ *     description: Exclui uma associação PedidoFuncionario do banco de dados.
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID da associação PedidoFuncionario
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Associação excluída com sucesso
+ *       404:
+ *         description: Associação não encontrada
+ */
+route.delete("/:id", PedidoFuncionarioController.deletePedidoFuncionario);
 /**
  * @swagger
  * /pedidofuncionario/{id}:
@@ -152,27 +173,6 @@ route.get("/:id", PedidoFuncionarioController.buscarPedidoFuncionarioPorId);
  */
 route.put("/:id", PedidoFuncionarioController.updatePedidoFuncionario);
 
-/**
- * @swagger
- * /pedidofuncionario/{id}:
- *   delete:
- *     summary: Exclui uma associação PedidoFuncionario por ID
- *     tags: 
- *       - pedido-funcionario
- *     description: Exclui uma associação PedidoFuncionario do banco de dados.
- *     parameters:
- *       - name: id
- *         in: path
- *         description: ID da associação PedidoFuncionario
- *         required: true
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Associação excluída com sucesso
- *       404:
- *         description: Associação não encontrada
- */
-route.delete("/:id", PedidoFuncionarioController.deletePedidoFuncionario);
+
 
 module.exports = route;

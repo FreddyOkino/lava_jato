@@ -63,7 +63,27 @@ route.get("/", NotaFiscalController.buscarNotasFiscais);
  *         description: Nota Fiscal não encontrada
  */
 route.get("/:id", NotaFiscalController.buscarNotaFiscalPorId);
-
+/**
+ * @swagger
+ * /notafiscal/{id}:
+ *   delete:
+ *     summary: Exclui uma Nota Fiscal
+ *     tags:
+ *       - nota-fiscal
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID da Nota Fiscal
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Nota Fiscal excluída com sucesso
+ *       404:
+ *         description: Nota Fiscal não encontrada
+ */
+route.delete("/:id", NotaFiscalController.deleteNotaFiscal);
 /**
  * @swagger
  * /notafiscal/{id}:
@@ -94,26 +114,6 @@ route.get("/:id", NotaFiscalController.buscarNotaFiscalPorId);
  */
 route.put("/:id", NotaFiscalController.updateNotaFiscal);
 
-/**
- * @swagger
- * /notafiscal/{id}:
- *   delete:
- *     summary: Exclui uma Nota Fiscal
- *     tags:
- *       - nota-fiscal
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: ID da Nota Fiscal
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Nota Fiscal excluída com sucesso
- *       404:
- *         description: Nota Fiscal não encontrada
- */
-route.delete("/:id", NotaFiscalController.deleteNotaFiscal);
+
 
 module.exports = route;
